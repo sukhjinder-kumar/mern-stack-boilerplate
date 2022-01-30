@@ -21,14 +21,15 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 const UsersList = (props) => {
-  const [users, setUsers] = useState([]);
-  const [sortedUsers, setSortedUsers] = useState([]);
-  const [sortName, setSortName] = useState(true);
-  const [searchText, setSearchText] = useState("");
+
+const [users, setUsers] = useState([]);
+const [sortedUsers, setSortedUsers] = useState([]);
+const [sortName, setSortName] = useState(true);
+const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/user")
+      .get("http://localhost:5000/buyers/")
       .then((response) => {
         setUsers(response.data);
         setSortedUsers(response.data);
@@ -145,15 +146,17 @@ const UsersList = (props) => {
                   </TableCell>
                   <TableCell>Name</TableCell>
                   <TableCell>Email</TableCell>
+                  <TableCell>Contact_number</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {users.map((user, ind) => (
                   <TableRow key={ind}>
                     <TableCell>{ind}</TableCell>
-                    <TableCell>{user.date}</TableCell>
+                    <TableCell>{user.createdAt.substring(0,10)}</TableCell>
                     <TableCell>{user.name}</TableCell>
                     <TableCell>{user.email}</TableCell>
+                    <TableCell>{user.contact_number}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
